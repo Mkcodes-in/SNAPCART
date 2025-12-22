@@ -1,12 +1,12 @@
-import Header from "./components/Navbar"
 import './App.css'
+import MainLayout from './layouts/MainLayout'
 
 function App() {
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#111827]">
-      <Header />
-    </div>
+    <>
+      <MainLayout />
+    </>
   )
 }
 
