@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
-  console.log(activeMenu)
+
   return (
     <div className="w-full bg-white border-b border-gray-100 shadow-sm">
       <header className="max-w-7xl mx-auto px-4">
@@ -38,7 +38,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
 
             {/* Search */}
-            <div className="relative">
+            <div className="relative hidden sm:block">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
@@ -64,8 +64,8 @@ export default function Header() {
 
               {/* Mobile Menu */}
               <button
-              onClick={() => setActiveMenu(prev => !prev)} 
-              className="md:hidden p-2.5 rounded-full transition-all relative cursor-pointer">
+                onClick={() => setActiveMenu(prev => !prev)}
+                className="md:hidden p-2.5 rounded-full transition-all relative cursor-pointer">
                 <span className={`absolute top-0 w-5 h-0.5 rounded ${activeMenu ? 'rotate-45 translate-y-2' : ''} left-0 transform transition-all ease-in bg-gray-800 mb-1`}></span>
                 <span className={`absolute top-2 w-5 h-0.5 rounded ${activeMenu ? 'opacity-0' : ''} left-0 transform transition-all ease-in bg-gray-800 mb-1`}></span>
                 <span className={`absolute top-4 w-5 h-0.5 rounded ${activeMenu ? '-rotate-45 -translate-y-2' : ''} left-0 transform transition-all ease-in bg-gray-800`}></span>
@@ -75,7 +75,34 @@ export default function Header() {
         </div>
 
         {/* Mobile Search */}
+        {activeMenu && (
+          <div className="lg:hidden border-t border-gray-100 py-4 animate-slideDown">
+            <div className="mb-6 px-2">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 placeholder:text-gray-400"
+                />
+              </div>
+            </div>
 
+            {/* Mobile Navigation */}
+            <nav className="flex flex-col px-2 space-y-3">
+              {NavLinks.map(itm => (
+                <Link
+                  key={itm.name}
+                  to={itm.path}
+                  onClick={() => setActiveMenu(false)}
+                  className="py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-200"
+                >
+                  {itm.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
       </header>
     </div>
   )
