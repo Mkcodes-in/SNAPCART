@@ -8,7 +8,7 @@ interface contactLinks extends NavLink{
 
 export const CustomerLinks: NavLink[] = [
     {
-        name: 'Help Cetner', 
+        name: 'Help Center', 
         path: '#'
     }, 
     {

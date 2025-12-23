@@ -15,9 +15,5 @@ export const NavLinks: NavLink[] = [
     {
         path: '/categories', 
         name: 'Categories'
-    }, 
-    {
-        path: '/deals', 
-        name: 'Deals'
     }
 ]
