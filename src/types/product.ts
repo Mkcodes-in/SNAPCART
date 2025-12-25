@@ -7,12 +7,17 @@ export interface product{
     discountPercentage: number;
     rating: number;
     stock?: number;
+    thumbnail: string
+}
+
+export interface productProps{
+    product: product;
 }
 
 export interface productState{
-    products: product[]; 
+    product: product[]; 
     loading: boolean;
-    error: string | null;
+    error: string | undefined;
 }
 
 export interface productDetails extends product{
