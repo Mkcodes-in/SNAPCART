@@ -6,6 +6,8 @@ import ImageSlider from "./ImageSlider";
 import { ArrowLeft, ChevronRight, Heart, Package, Shield, Star, Tag, Truck } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
+import CustomerReview from "./CustomerReview";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState<productDetails | null>(null);
@@ -36,9 +38,9 @@ export default function ProductDetails() {
         </div>
 
         <button
-        className="flex items-center gap-3 p-2 cursor-pointer"
-        onClick={() => navigate(-1)}
-        ><ArrowLeft size={19}/> Back</button>
+          className="flex items-center gap-3 p-2 cursor-pointer"
+          onClick={() => navigate(-1)}
+        ><ArrowLeft size={19} /> Back</button>
 
         {/* Details Container */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -74,7 +76,7 @@ export default function ProductDetails() {
                         key={i}
                         className={`w-5 h-5 ${i < Math.floor(product.rating)
                           ? 'fill-yellow-400 text-yellow-400'
-                          : 'fill-muted text-muted'
+                          : 'fill-gray-50 text-gray-200'
                           }`}
                       />
                     ))}
@@ -145,10 +147,18 @@ export default function ProductDetails() {
 
               {/* Action Buttons */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Button size="lg" className="w-full" disabled={!product.stock || product.stock === 0}>
+                <Button
+                  onClick={() => toast.success('product added into card')}
+                  size="lg"
+                  className="w-full"
+                  disabled={!product.stock || product.stock === 0}>
                   Add to Cart
                 </Button>
-                <Button size="lg" variant="outline" className="w-full">
+                <Button
+                  onClick={() => toast('product added into card')}
+                  size="lg"
+                  variant="outline"
+                  className="w-full">
                   Buy Now
                 </Button>
               </div>
@@ -156,6 +166,9 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
+      <CustomerReview 
+      review={product.reviews}
+      />
     </div>
   );
 }

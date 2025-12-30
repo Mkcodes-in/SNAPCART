@@ -22,7 +22,6 @@ export default function ImageSlider({ url }: imageProps) {
                     </CarouselItem>
                 ))}
             </CarouselContent>
-
             <CarouselPrevious className="left-4"/>
             <CarouselNext className="right-4"/>
         </Carousel>

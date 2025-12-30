@@ -5,32 +5,36 @@ import Home from './pages/Home'
 import Products from './pages/Products'
 import Category from './pages/Category'
 import ProductDetails from './components/ProductDetails'
+import { Toaster } from './components/ui/sonner'
 
 function App() {
 
   return (
-    <Routes>
-      <Route
-        element={<MainLayout />}
-      >
+    <>
+      <Toaster />
+      <Routes>
         <Route
-          element={<Home />}
-          path='/'
-        />
-        <Route
-          element={<Products />}
-          path='/products'
-        />
-        <Route
-          element={<ProductDetails />}
-          path='/products/:id'
-        />
-        <Route
-          element={<Category />}
-          path='/categories'
-        />
-      </Route>
-    </Routes>
+          element={<MainLayout />}
+        >
+          <Route
+            element={<Home />}
+            path='/'
+          />
+          <Route
+            element={<Products />}
+            path='/products'
+          />
+          <Route
+            element={<ProductDetails />}
+            path='/products/:id'
+          />
+          <Route
+            element={<Category />}
+            path='/categories'
+          />
+        </Route>
+      </Routes>
+    </>
   )
 }
 

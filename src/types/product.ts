@@ -7,7 +7,8 @@ export interface product {
     discountPercentage: number;
     rating: number;
     stock?: number;
-    thumbnail: string
+    thumbnail: string;
+    reviews: Review[]
 }
 
 export interface productProps {
@@ -20,7 +21,7 @@ export interface productState {
     error: string | undefined;
 }
 
-export interface productDetails extends product, Review {
+export interface productDetails extends product {
     brand: string;
     sku: string;
     dimensions: {
@@ -38,4 +39,8 @@ export interface Review {
     comment: string;
     date: string;
     reviewerName: string;
+}
+
+export interface ReviewProps{
+    review: Review[];
 }
