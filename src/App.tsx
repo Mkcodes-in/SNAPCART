@@ -4,13 +4,14 @@ import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
 import Products from './pages/Products'
 import Category from './pages/Category'
+import ProductDetails from './components/ProductDetails'
 
 function App() {
 
   return (
     <Routes>
       <Route
-      element={<MainLayout />}
+        element={<MainLayout />}
       >
         <Route
           element={<Home />}
@@ -19,6 +20,10 @@ function App() {
         <Route
           element={<Products />}
           path='/products'
+        />
+        <Route
+          element={<ProductDetails />}
+          path='/products/:id'
         />
         <Route
           element={<Category />}

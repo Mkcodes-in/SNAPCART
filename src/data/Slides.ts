@@ -1,16 +1,16 @@
 export const slides = [
     {
         id: 1,
-        title: "Summer Collection 2024",
+        title: "Summer Collection",
         subtitle: "Up to 50% Off",
         description: "Discover the latest trends in fashion with our exclusive summer collection",
         image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600",
         buttonText: "Shop Now",
-        color: "from-blue-600/90 to-purple-600/90"
+        color: "from-blue-600/90 to-purple-600/20"
     },
     {
         id: 2,
-        title: "Premium Electronics",
+        title: "Electronics",
         subtitle: "New Arrivals",
         description: "Cutting-edge technology with premium quality and performance",
         image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=1600",

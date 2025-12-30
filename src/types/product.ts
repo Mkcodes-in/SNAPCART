@@ -1,4 +1,4 @@
-export interface product{
+export interface product {
     id: number;
     title: string;
     description: string;
@@ -10,17 +10,17 @@ export interface product{
     thumbnail: string
 }
 
-export interface productProps{
+export interface productProps {
     product: product;
 }
 
-export interface productState{
-    product: product[]; 
+export interface productState {
+    product: product[];
     loading: boolean;
     error: string | undefined;
 }
 
-export interface productDetails extends product{
+export interface productDetails extends product {
     brand: string;
     sku: string;
     dimensions: {
@@ -33,7 +33,7 @@ export interface productDetails extends product{
     images: string[];
 }
 
-export interface Review{
+export interface Review {
     rating: number;
     comment: string;
     date: string;
