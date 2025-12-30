@@ -20,7 +20,7 @@ export interface productState {
     error: string | undefined;
 }
 
-export interface productDetails extends product {
+export interface productDetails extends product, Review {
     brand: string;
     sku: string;
     dimensions: {

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 
 export default function Products() {
   const { product, loading } = useSelector((state: RootState) => state.products);
-  console.log(product)
+
   if (!product || product.length === 0) {
     return <p>Product not found ):</p>
   }

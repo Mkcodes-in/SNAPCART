@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import type { RootState, AppDispatch } from "@/store/store";
 import ProductLoader from "@/components/ProductLoader";
 import ProductCard from "@/components/ProductCard";
+import { slides } from "@/data/Slides";
 import Slider from "@/components/Slider";
 
 export default function Home() {
@@ -21,7 +22,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen max-w-7xl mx-auto px-6 py-2">
-      <Slider />
+
+      <Slider
+        slides={slides}
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-12">
         {product.map((prod) => (

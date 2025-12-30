@@ -2,10 +2,12 @@ import type { productProps } from "@/types/product";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Button } from "./ui/button";
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ProductCard({ product }: productProps) {
     const isOnSale = product.discountPercentage && product.discountPercentage > 0
+    const navigate = useNavigate();
 
     return (
         <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-border/40 hover:border-primary/30">
@@ -62,6 +64,7 @@ export default function ProductCard({ product }: productProps) {
 
             <CardFooter className="p-5 pt-0">
                 <Button
+                    onClick={() => navigate(`/products/${product.id}`)}
                     className="w-full group/btn cursor-pointer"
                     size="lg"
                     disabled={product.stock === 0}

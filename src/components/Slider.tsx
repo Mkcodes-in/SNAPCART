@@ -1,8 +1,8 @@
-import { slides } from "@/data/Slides";
+import type { SlidesProps } from "@/types/sliderType";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 
-export default function ImageSlider() {
+export default function Slider({ slides }: SlidesProps) {
 
   return (
     <Carousel
