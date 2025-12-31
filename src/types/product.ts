@@ -1,3 +1,5 @@
+import Category from "@/pages/Category";
+
 export interface product {
     id: number;
     title: string;
@@ -17,6 +19,7 @@ export interface productProps {
 
 export interface productState {
     product: product[];
+    category: product[];
     loading: boolean;
     error: string | undefined;
 }
@@ -41,6 +44,15 @@ export interface Review {
     reviewerName: string;
 }
 
-export interface ReviewProps{
+export interface ReviewProps {
     review: Review[];
+}
+
+export interface Category {
+    name: string;
+    url: string;
+}
+
+export type categoryProps = {
+    category: Category[];
 }

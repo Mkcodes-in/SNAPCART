@@ -13,7 +13,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(fetchProduct());
-  }, [dispatch])
+  }, [])
 
   if (loading) { return <ProductLoader /> }
   if (!product || product.length === 0) {

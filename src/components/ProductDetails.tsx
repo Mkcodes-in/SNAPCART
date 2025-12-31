@@ -14,7 +14,6 @@ export default function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(product)
   useEffect(() => {
     (async () => {
       const data = await getProductById(id);

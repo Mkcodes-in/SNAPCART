@@ -1,35 +1,59 @@
 import type { productState } from "@/types/product";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchProducts } from "./fetchProducts";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { fetchProductByCategory, fetchProducts } from "./fetchProducts";
 
-export const fetchProduct = createAsyncThunk('proudct/fetchProducts', async () => {
-    return await fetchProducts();
-})
+export const fetchProduct = createAsyncThunk(
+    'proudct/fetchProducts',
+    async () => {
+        return await fetchProducts();
+    })
+
+export const fetchProductCategory = createAsyncThunk(
+    'product/fetchCategory',
+    async () => {
+        return await fetchProductByCategory();
+    })
 
 const initialState: productState = {
-    product: [], 
-    loading: false, 
+    product: [],
+    category: [],
+    loading: false,
     error: undefined
 }
 
 const productSlice = createSlice({
     name: 'products',
-    initialState, 
-    reducers: {}, 
+    initialState,
+    reducers: {},
+
     extraReducers: (builder) => {
-        builder
-        .addCase(fetchProduct.pending, (state) => {
-            state.loading = true;
-            state.error = undefined;
-        })
-        .addCase(fetchProduct.fulfilled, (state, action) => {
-            state.loading = false;
-            state.product = action.payload.products;
-        })
-        .addCase(fetchProduct.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.error?.message;
-        })
+
+        builder.addCase(fetchProduct.fulfilled,
+            (state, action) => {
+                state.product = action.payload;
+                state.loading = false;
+            })
+
+        builder.addCase(fetchProductCategory.fulfilled,
+            (state, action) => {
+                state.category = action.payload;
+                state.loading = false;
+            })
+
+        builder.addMatcher(isAnyOf(fetchProduct.pending, fetchProductCategory.pending),
+            (state) => {
+                state.loading = true;
+                state.error = undefined;
+            })
+            
+        builder.addMatcher(
+            isAnyOf(fetchProduct.rejected, fetchProductCategory.rejected),
+            (state, action) => {
+                state.error = action.error.message;
+                state.loading = false;
+            }
+        );
+
     }
 })
 
