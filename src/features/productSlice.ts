@@ -16,7 +16,7 @@ export const fetchProductCategory = createAsyncThunk(
 
 const initialState: productState = {
     product: [],
-    category: [],
+    productCategory: [],
     loading: false,
     error: undefined
 }
@@ -36,7 +36,7 @@ const productSlice = createSlice({
 
         builder.addCase(fetchProductCategory.fulfilled,
             (state, action) => {
-                state.category = action.payload;
+                state.productCategory = action.payload;
                 state.loading = false;
             })
 
@@ -45,7 +45,7 @@ const productSlice = createSlice({
                 state.loading = true;
                 state.error = undefined;
             })
-            
+
         builder.addMatcher(
             isAnyOf(fetchProduct.rejected, fetchProductCategory.rejected),
             (state, action) => {

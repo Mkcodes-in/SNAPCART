@@ -1,5 +1,3 @@
-import Category from "@/pages/Category";
-
 export interface product {
     id: number;
     title: string;
@@ -10,7 +8,7 @@ export interface product {
     rating: number;
     stock?: number;
     thumbnail: string;
-    reviews: Review[]
+    reviews: Review[];
 }
 
 export interface productProps {
@@ -19,7 +17,7 @@ export interface productProps {
 
 export interface productState {
     product: product[];
-    category: product[];
+    productCategory: productCategory[];
     loading: boolean;
     error: string | undefined;
 }
@@ -48,11 +46,12 @@ export interface ReviewProps {
     review: Review[];
 }
 
-export interface Category {
+export interface productCategory{
     name: string;
     url: string;
+    slug: string;
 }
 
-export type categoryProps = {
-    category: Category[];
+export interface productCategoryProps{
+    categories: productCategory[];
 }
