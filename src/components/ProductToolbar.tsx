@@ -2,17 +2,21 @@ import { Card, CardContent, CardHeader } from "./ui/card";
 import type React from "react";
 
 type productCategoryProp = {
-  categories:  { name: string }[];
+  categories: { name: string }[];
   selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  maxPrice: number;
+  minPrice: number;
+  range: number;
+  setRange: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function ProductToolbar({ categories, selectedCategory, setSelectedCategory }: productCategoryProp) {
+export default function ProductToolbar({ categories, selectedCategory, setSelectedCategory, maxPrice, minPrice, range, setRange }: productCategoryProp) {
 
   function handleCategory(categoryName: string) {
-    setSelectedCategory(categoryName)
+    setSelectedCategory(categoryName);
   }
-  
+
   return (
     <Card className="w-full max-w-xs rounded-xl border bg-white">
       {/* Header */}
@@ -33,15 +37,13 @@ export default function ProductToolbar({ categories, selectedCategory, setSelect
           {categories.map((category) => (
             <label
               key={category.name}
-              className="flex items-center gap-3 cursor-pointer rounded-md 
-                         px-2 py-1 hover:bg-gray-100 transition"
+              className="flex items-center gap-3 cursor-pointer rounded-md px-2 py-1 hover:bg-gray-100 transition"
             >
               <input
                 checked={selectedCategory.includes(category.name)}
                 onChange={() => handleCategory(category.name)}
                 type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 
-                           text-black focus:ring-black"
+                className="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
               />
               <span className="text-sm text-gray-800">
                 {category.name}
@@ -49,6 +51,18 @@ export default function ProductToolbar({ categories, selectedCategory, setSelect
             </label>
           ))}
         </div>
+
+        {/* Sort price */}
+        <input
+          className="w-full"
+          value={range}
+          min={minPrice}
+          max={maxPrice}
+          onChange={(e) => setRange(Number(e.target.value))}
+          type="range"
+          name="range"
+          id="range" />
+
       </CardContent>
     </Card>
   );

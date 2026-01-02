@@ -30,8 +30,11 @@ export default function ProductDetails() {
     })();
   }, [id]);
 
+  if (loading) return (<div className="max-w-7xl mx-auto h-screen">
+    <ProductCardSkeleton />
+  </div>)
+  
   if (!product || product === null) return;
-  if (loading) return <ProductCardSkeleton />
 
   return (
     <div className="w-full max-w-7xl mx-auto min-h-screen py-8 px-4 sm:px-6 lg:px-8">

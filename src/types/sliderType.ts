@@ -10,6 +10,7 @@ export interface slide {
     image: string;
     buttonText: string;
     color: string;
+    btnClick: string;
 }
 
 type normalise = Partial<slide>;
