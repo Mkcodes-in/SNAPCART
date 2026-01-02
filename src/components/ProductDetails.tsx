@@ -8,20 +8,30 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import CustomerReview from "./CustomerReview";
+import { ProductCardSkeleton } from "./Loader";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState<productDetails | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-      const data = await getProductById(id);
-      setProduct(data);
+      try {
+        setLoading(true);
+        const data = await getProductById(id);
+        setProduct(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, [id]);
 
-  if (!product || product === null) return <p>Product Not Found ): </p>
+  if (!product || product === null) return;
+  if (loading) return <ProductCardSkeleton />
 
   return (
     <div className="w-full max-w-7xl mx-auto min-h-screen py-8 px-4 sm:px-6 lg:px-8">
@@ -165,8 +175,8 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
-      <CustomerReview 
-      review={product.reviews}
+      <CustomerReview
+        review={product.reviews}
       />
     </div>
   );

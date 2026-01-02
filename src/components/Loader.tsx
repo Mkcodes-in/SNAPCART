@@ -1,16 +1,11 @@
-import { Card, CardContent } from "./ui/card";
+import { ProductCardSke } from "./Loader/ProductSek";
 
 export function ProductCardSkeleton() {
   return (
-    <Card className="overflow-hidden animate-pulse">
-      <div className="aspect-square bg-muted" />
-      <CardContent className="p-5">
-        <div className="h-4 bg-muted rounded mb-2" />
-        <div className="h-3 bg-muted rounded mb-4 w-3/4" />
-        <div className="h-3 bg-muted rounded mb-2" />
-        <div className="h-3 bg-muted rounded mb-4 w-1/2" />
-        <div className="h-6 bg-muted rounded w-1/3" />
-      </CardContent>
-    </Card>
+    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      {[...Array(6)].map((_, index) => (
+        <ProductCardSke key={index} />
+      ))}
+    </div>
   )
 }

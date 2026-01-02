@@ -3,22 +3,16 @@ import type React from "react";
 
 type productCategoryProp = {
   categories:  { name: string }[];
-  selectedCategory: string[];
-  setSelectedCategory: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function ProductToolbar({ categories, selectedCategory, setSelectedCategory }: productCategoryProp) {
 
   function handleCategory(categoryName: string) {
-    setSelectedCategory((prev) =>
-      prev.includes(categoryName) ?
-        prev.filter(c => c !== categoryName) :
-        [...prev, categoryName]
-    )
+    setSelectedCategory(categoryName)
   }
-
-  console.log(selectedCategory)
-
+  
   return (
     <Card className="w-full max-w-xs rounded-xl border bg-white">
       {/* Header */}
