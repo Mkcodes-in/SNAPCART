@@ -1,10 +1,14 @@
 import { NavLinks } from "@/data/NavLinks"
+import type { RootState } from "@/store/store";
 import { Search, ShoppingCart, User } from "lucide-react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
+  const state = useSelector((state: RootState) => state.cart);
+  const navigate = useNavigate();
 
   return (
     <div className="w-full bg-white border-b border-gray-100 shadow-sm">
@@ -51,10 +55,12 @@ export default function Header() {
 
             {/* Icons */}
             <div className="flex items-center gap-4">
-              <button className="p-2.5 hover:bg-gray-100 rounded-full transition-colors relative cursor-pointer">
+              <button
+              onClick={() => navigate('/cart')} 
+              className="p-2.5 hover:bg-gray-100 rounded-full transition-colors relative cursor-pointer">
                 <ShoppingCart className="text-gray-700 w-5 h-5" />
                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                  3
+                  {state.cart.length}
                 </span>
               </button>
 

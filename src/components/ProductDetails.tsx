@@ -1,5 +1,5 @@
 import { getProductById } from "@/features/fetchProducts";
-import type { productDetails } from "@/types/product";
+import type { ProductDetails } from "@/types/product";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import ImageSlider from "./ImageSlider";
@@ -9,12 +9,15 @@ import { Button } from "./ui/button";
 import { toast } from "sonner";
 import CustomerReview from "./CustomerReview";
 import { ProductCardSkeleton } from "./Loader";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/features/cartSlice";
 
 export default function ProductDetails() {
-  const [product, setProduct] = useState<productDetails | null>(null);
+  const [product, setProduct] = useState<ProductDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -160,7 +163,10 @@ export default function ProductDetails() {
               {/* Action Buttons */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Button
-                  onClick={() => toast.success('product added into card')}
+                  onClick={() => {
+                    toast.success('Added Product Into Cart');
+                    dispatch(addToCart(product));
+                  }}
                   size="lg"
                   className="w-full"
                   disabled={!product.stock || product.stock === 0}>

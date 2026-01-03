@@ -1,6 +1,6 @@
-import type { productState } from "@/types/product";
 import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchProductByCategory, fetchProducts } from "./fetchProducts";
+import type { ProductState } from "@/types/product";
 
 export const fetchProduct = createAsyncThunk(
     'proudct/fetchProducts',
@@ -14,7 +14,7 @@ export const fetchProductCategory = createAsyncThunk(
         return await fetchProductByCategory();
     })
 
-const initialState: productState = {
+const initialState: ProductState = {
     product: [],
     productCategory: [],
     loading: false,

@@ -13,28 +13,27 @@ export default function Category() {
   const { productCategory, loading } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
   const [selectedCategory, setSelectedCategory] = useState<string>('beauty');
-  const [products, setProducts] = useState<product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<product[]>([]);
   const [range, setRange] = useState<number>(0);
 
   console.log(filteredProducts, range)
-  const finalProducts = filteredProducts.filter((product) => product.price <= range);
   // const maxPrice = ;
   useEffect(() => {
     dispatch(fetchProductCategory());
   }, []);
-
+  
   useEffect(() => {
     (async () => {
       const res = await getProductByCategory(selectedCategory);
-      setProducts(res);
       setFilteredProducts(res);
     })()
   }, [selectedCategory, range])
-
+  
   const maxPrice = Math.max(...filteredProducts.map(p => p.price));
   const minPrice = Math.min(...filteredProducts.map(p => p.price));
+  const finalProducts = filteredProducts.filter((product) => product.price <= range);
 
+  console.log(finalProducts)
   if (loading) return (<div className="max-w-7xl mx-auto">
     <ProductCardSkeleton />
   </div>)
@@ -76,7 +75,7 @@ export default function Category() {
           )
           :
           (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.map((prod: product) => (
+            {finalProducts.map((prod: product) => (
               <ProductCard
                 key={prod.id}
                 product={prod}
@@ -85,6 +84,5 @@ export default function Category() {
           </div>)}
       </div>
     </div>
-
   )
 }

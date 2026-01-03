@@ -6,6 +6,7 @@ import Products from './pages/Products'
 import Category from './pages/Category'
 import ProductDetails from './components/ProductDetails'
 import { Toaster } from './components/ui/sonner'
+import Cart from './pages/Cart'
 
 function App() {
 
@@ -31,6 +32,10 @@ function App() {
           <Route
             element={<Category />}
             path='/categories'
+          />
+          <Route
+            element={<Cart />}
+            path='/cart'
           />
         </Route>
       </Routes>
