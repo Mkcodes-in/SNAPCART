@@ -4,7 +4,7 @@ import ProductToolbar from "@/components/ProductToolbar";
 import { getProductByCategory } from "@/features/fetchProducts";
 import { fetchProductCategory } from "@/features/productSlice";
 import { type AppDispatch, type RootState } from "@/store/store";
-import type { product } from "@/types/product";
+import type { Product } from "@/types/product";
 import { PackageX } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
@@ -13,7 +13,7 @@ export default function Category() {
   const { productCategory, loading } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch<AppDispatch>();
   const [selectedCategory, setSelectedCategory] = useState<string>('beauty');
-  const [filteredProducts, setFilteredProducts] = useState<product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [range, setRange] = useState<number>(0);
 
   console.log(filteredProducts, range)
@@ -39,10 +39,11 @@ export default function Category() {
   </div>)
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-4 grid grid-cols-12 gap-6 px-4">
+    <div className="w-full max-w-7xl mx-auto py-4 px-4">
+      <div className="grid grid-cols-12 gap-6">
 
       {/* Sidebar */}
-      <div className="col-span-3 sticky top-4 h-fit">
+      <div className="md:sticky top-4 h-fit col-span-12 md:col-span-4 lg:col-span-3">
         <ProductToolbar
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
@@ -55,7 +56,7 @@ export default function Category() {
       </div>
 
       {/* Products */}
-      <div className="col-span-9">
+      <div className="col-span-12 md:col-span-8 lg:col-span-9">
 
         {/* ProductList */}
         {finalProducts.length === 0 ?
@@ -69,19 +70,20 @@ export default function Category() {
             </h2>
 
             <p className="mt-1 text-sm text-gray-500">
-              Try adjusting your filters or search something else
+              Try adjusting your filters or search something elsen
             </p>
           </div>
           )
           :
           (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {finalProducts.map((prod: product) => (
+            {finalProducts.map((prod: Product) => (
               <ProductCard
                 key={prod.id}
                 product={prod}
               />
             ))}
           </div>)}
+          </div>
       </div>
     </div>
   )

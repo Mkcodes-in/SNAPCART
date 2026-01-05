@@ -22,11 +22,6 @@ export default function ProductToolbar({ categories, selectedCategory, setSelect
       {/* Header */}
       <CardHeader className="flex flex-row items-center justify-between pb-3">
         <h1 className="text-lg font-semibold">Filters</h1>
-        <button
-          // onClick={() => setIsSelected('')}
-          className="text-sm text-blue-600 cursor-pointer">
-          Clear all
-        </button>
       </CardHeader>
 
       {/* Body */}
@@ -53,16 +48,35 @@ export default function ProductToolbar({ categories, selectedCategory, setSelect
         </div>
 
         {/* Sort price */}
-        <input
-          className="w-full"
-          value={range}
-          min={minPrice}
-          max={maxPrice}
-          onChange={(e) => setRange(Number(e.target.value))}
-          type="range"
-          name="range"
-          id="range" />
+        <div className="w-full px-1">
+          <div className="relative w-full">
+            {/* Slider */}
+            <input
+              type="range"
+              min={minPrice}
+              max={maxPrice}
+              value={range}
+              onChange={(e) => setRange(Number(e.target.value))}
+              className="w-full h-2 appearance-none rounded-lg bg-gray-200 accent-gray-950 cursor-pointer"/>
 
+            {/* Value */}
+            <div
+              className="absolute -top-8 text-xs font-medium text-gray-950 bg-gray-200 px-2 py-1 rounded shadow"
+              style={{
+                left: `${((range - minPrice) / (maxPrice - minPrice)) * 100}%`,
+                transform: "translateX(-50%)",
+              }}
+            >
+              ₹{range}
+            </div>
+          </div>
+
+          {/* Min / Max */}
+          <div className="flex justify-between text-xs text-gray-500 mt-2">
+            <span>₹{minPrice}</span>
+            <span>₹{maxPrice}</span>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
