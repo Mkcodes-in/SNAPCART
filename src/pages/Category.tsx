@@ -16,7 +16,7 @@ export default function Category() {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [range, setRange] = useState<number>(0);
 
-  console.log(filteredProducts, range)
+  // console.log(filteredProducts, range)
   // const maxPrice = ;
   useEffect(() => {
     dispatch(fetchProductCategory());
