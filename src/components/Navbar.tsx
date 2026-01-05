@@ -4,6 +4,9 @@ import { Search, ShoppingCart, User } from "lucide-react"
 import { useState } from "react"
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
+import '../App.css'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
 
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
@@ -19,11 +22,8 @@ export default function Header() {
           <Link
             className="flex items-center gap-3"
             to={'/'}>
-            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
-              <ShoppingCart className="text-white" size={22} />
-            </div>
             <div className="flex flex-col">
-              <span className="font-bold text-2xl text-gray-900">SnapCart</span>
+              <span className="navbar font-bold text-2xl text-gray-900">SNAPCART</span>
             </div>
           </Link>
 
@@ -56,16 +56,34 @@ export default function Header() {
             {/* Icons */}
             <div className="flex items-center gap-4">
               <button
-              onClick={() => navigate('/cart')} 
-              className="p-2.5 hover:bg-gray-100 rounded-full transition-colors relative cursor-pointer">
+                onClick={() => navigate('/cart')}
+                className="p-2.5 hover:bg-gray-100 rounded-full transition-colors relative cursor-pointer">
                 <ShoppingCart className="text-gray-700 w-5 h-5" />
                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
                   {state.cart.length}
                 </span>
               </button>
 
-              <button className="p-2.5 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
-                <User className="text-gray-700 w-5 h-5" />
+              <button className="rounded-full transition-colors cursor-pointer">
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    asChild
+                    className="cursor-pointer">
+                    <Button variant={"outline"}><User className="text-gray-700 w-5 h-5 cursor-pointer" /></Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuGroup>
+                      <div className="flex flex-col text-center cursor-pointer">
+                        <DropdownMenuItem
+                          className="flex items-center justify-center text-md cursor-pointer"
+                          onClick={() => navigate('/wishlist')}>Wishlist</DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="flex items-center justify-center text-md cursor-pointer"
+                          onClick={() => navigate('/orders')}>Orders</DropdownMenuItem>
+                      </div>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </button>
 
               {/* Mobile Menu */}

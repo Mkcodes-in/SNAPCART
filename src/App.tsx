@@ -6,7 +6,9 @@ import Products from './pages/Products'
 import Category from './pages/Category'
 import ProductDetails from './components/ProductDetails'
 import { Toaster } from './components/ui/sonner'
-import Cart from './pages/Cart'
+import Cart from './components/Cart'
+import Wishlist from './components/Wishlist'
+import Order from './components/Order'
 
 function App() {
 
@@ -36,6 +38,14 @@ function App() {
           <Route
             element={<Cart />}
             path='/cart'
+          />
+          <Route
+            element={<Wishlist />}
+            path='/wishlist'
+          />
+          <Route
+            element={<Order />}
+            path='/orders'
           />
         </Route>
       </Routes>

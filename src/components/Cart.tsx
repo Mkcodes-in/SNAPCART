@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { addToCart, DecreaseQuantity } from "@/features/cartSlice";
 import type { RootState } from "@/store/store";
-import { ArrowLeft, Minus, Plus, SeparatorHorizontal, ShoppingBag } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 
