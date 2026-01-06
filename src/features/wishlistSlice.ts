@@ -14,8 +14,15 @@ const wishlistSlice = createSlice({
     initialState,
     reducers: {
         addToWishlist: (state, action) => {
-            state.wishlist.push(action.payload);
-        }
+            const product = state.wishlist.find(p => p.id === action.payload.id);
+            
+            if (product) {
+                state.wishlist = state.wishlist.filter(p => p.id !== action.payload.id);
+            }
+            else {
+                state.wishlist.push(action.payload);
+            }
+        }   
     }
 });
 

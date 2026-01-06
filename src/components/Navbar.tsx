@@ -7,10 +7,10 @@ import { Link, useNavigate } from "react-router-dom"
 import '../App.css'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
   const state = useSelector((state: RootState) => state.cart);
+  const [text, setText] = useState<string>('');
   const navigate = useNavigate();
 
   return (
@@ -46,6 +46,9 @@ export default function Header() {
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  onClick={() => navigate('/products')}
                   type="text"
                   placeholder="Search for products..."
                   className="pl-12 pr-4 py-2.5 w-64 bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 placeholder:text-gray-400"
@@ -64,7 +67,7 @@ export default function Header() {
                 </span>
               </button>
 
-              <button className="rounded-full transition-colors cursor-pointer">
+              <div className="rounded-full transition-colors cursor-pointer">
                 <DropdownMenu>
                   <DropdownMenuTrigger
                     asChild
@@ -84,7 +87,7 @@ export default function Header() {
                     </DropdownMenuGroup>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              </button>
+              </div>
 
               {/* Mobile Menu */}
               <button

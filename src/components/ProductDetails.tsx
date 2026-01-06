@@ -9,8 +9,10 @@ import { Button } from "./ui/button";
 import { toast } from "sonner";
 import CustomerReview from "./CustomerReview";
 import { ProductCardSkeleton } from "./Loader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/features/cartSlice";
+import { addToWishlist } from "@/features/wishlistSlice";
+import type { RootState } from "@/store/store";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState<ProductDetails | null>(null);
@@ -18,6 +20,9 @@ export default function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const wishlistState = useSelector((state: RootState) => state.wishlist);
+  const isWishlist = wishlistState.wishlist.some(p => p.id === product?.id);
+  console.log(isWishlist)
 
   useEffect(() => {
     (async () => {
@@ -73,7 +78,11 @@ export default function ProductDetails() {
                 {" by "}
                 {product.brand}
               </span>
-              <button><Heart /></button>
+              <button 
+              onClick={() => dispatch(addToWishlist(product))}
+              className={`cursor-pointer`}
+              >{isWishlist ? <Heart className="text-red-500 drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] 
+               scale-110 transition-all duration-300" stroke="none" fill="red"/> : <Heart />}</button>
             </div>
 
             {/* title */}

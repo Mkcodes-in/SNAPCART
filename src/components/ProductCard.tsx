@@ -1,11 +1,11 @@
-import type { productProps } from "@/types/product";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Button } from "./ui/button";
 import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import type { ProductProps } from "@/types/product";
 
 
-export default function ProductCard({ product }: productProps) {
+export default function ProductCard({ product }: ProductProps) {
     const isOnSale = product.discountPercentage && product.discountPercentage > 0
     const navigate = useNavigate();
 
