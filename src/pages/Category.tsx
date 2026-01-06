@@ -34,7 +34,6 @@ export default function Category() {
   const minPrice = Math.min(...filteredProducts.map(p => p.price));
   const finalProducts = filteredProducts.filter((product) => product.price <= range);
 
-  console.log(finalProducts)
   if (loading) return (<div className="max-w-7xl mx-auto">
     <ProductCardSkeleton />
   </div>)

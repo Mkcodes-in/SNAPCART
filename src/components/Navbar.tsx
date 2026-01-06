@@ -8,18 +8,25 @@ import '../App.css'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { getProductBySearch } from "@/features/fetchProducts";
-import type { Product } from "@/types/product";
+import { useSearch } from "./hooks/useSearch";
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
   const state = useSelector((state: RootState) => state.cart);
   const [text, setText] = useState<string>('');
   const navigate = useNavigate();
-  const [searchProduct, setSearchProduct] = useState<Product[]>([]);
+  const { setSearchProduct, setError, setLoading, searchProduct } = useSearch();
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await getProductBySearch(text);
-    setSearchProduct(res);
+    try {
+      const res = await getProductBySearch(text);
+      setSearchProduct(res);
+      setLoading(true);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
     setText('');
   }
 

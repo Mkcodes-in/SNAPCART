@@ -6,8 +6,8 @@ type SearchProps = {
 }
 
 type SearchContextType = {
-    product: Product[];
-    setProduct: Dispatch<SetStateAction<Product[]>>;
+    searchProduct: Product[];
+    setSearchProduct: Dispatch<SetStateAction<Product[]>>;
     loading: boolean;
     setLoading: Dispatch<SetStateAction<boolean>>;
     error: string;
@@ -17,15 +17,15 @@ type SearchContextType = {
 export const SearchContext = createContext<SearchContextType | null>(null);
 
 export const SearchProvider = ({ children }: SearchProps) => {
-    const [product, setProduct] = useState<Product[]>([]);
+    const [searchProduct, setSearchProduct] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
 
     return (
         <SearchContext.Provider
             value={{
-                product,
-                setProduct,
+                searchProduct,
+                setSearchProduct,
                 loading,
                 setLoading,
                 error,
