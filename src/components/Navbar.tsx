@@ -1,18 +1,29 @@
 import { NavLinks } from "@/data/NavLinks"
 import type { RootState } from "@/store/store";
 import { Search, ShoppingCart, User } from "lucide-react"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
 import '../App.css'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
+import { getProductBySearch } from "@/features/fetchProducts";
+import type { Product } from "@/types/product";
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
   const state = useSelector((state: RootState) => state.cart);
   const [text, setText] = useState<string>('');
   const navigate = useNavigate();
+  const [searchProduct, setSearchProduct] = useState<Product[]>([]);
 
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await getProductBySearch(text);
+    setSearchProduct(res);
+    setText('');
+  }
+
+  console.log(searchProduct)
   return (
     <div className="w-full bg-white border-b border-gray-100 shadow-sm">
       <header className="max-w-7xl mx-auto px-4">
@@ -43,7 +54,9 @@ export default function Header() {
 
             {/* Search */}
             <div className="relative hidden sm:block">
-              <div className="relative">
+              <form
+                onSubmit={handleSearch}
+                className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   value={text}
@@ -53,7 +66,7 @@ export default function Header() {
                   placeholder="Search for products..."
                   className="pl-12 pr-4 py-2.5 w-64 bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 placeholder:text-gray-400"
                 />
-              </div>
+              </form>
             </div>
 
             {/* Icons */}

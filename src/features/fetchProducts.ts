@@ -19,3 +19,13 @@ export const getProductByCategory = async (category: string | undefined) => {
     const res = await api.get(`product/category/${category}`);
     return res?.data?.products;
 }
+
+export const getProductBySearch = async (productName: string) => {
+    if (productName === '') {
+        return;
+    }
+    else {
+        const res = await api.get(`products/search?q=${productName}`);
+        return res?.data?.products;
+    }
+}
