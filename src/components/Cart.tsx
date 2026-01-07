@@ -13,7 +13,6 @@ export default function Cart() {
   const price = state.cart.map(product => product.price * product.quantity);
   const totalPrice = price.reduce((acc, curr) => acc + curr, 0)
 
-
   if (state.cart.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -37,7 +36,7 @@ export default function Cart() {
           <Button
             variant="ghost"
             onClick={() => navigate(-1)}
-            className="gap-2"
+            className="gap-2 text-md font-normal"
           >
             <ArrowLeft size={18} />
             Back
@@ -120,8 +119,9 @@ export default function Cart() {
                 <Button
                   className="w-full cursor-pointer"
                   size="lg"
+                  onClick={() => navigate('/checkout')}
                 >
-                  Place Order
+                  Continue
                 </Button>
               </CardContent>
             </Card>

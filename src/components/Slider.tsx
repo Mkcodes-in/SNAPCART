@@ -1,8 +1,17 @@
 import type { SlidesProps } from "@/types/sliderType";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
 import { ArrowRight, ShoppingBag } from "lucide-react";
+import { getProductBySearch } from "@/features/fetchProducts";
+import { useNavigate } from "react-router-dom";
 
 export default function Slider({ slides }: SlidesProps) {
+  const navigate = useNavigate();
+
+  async function searchSlide(text: string) {
+    console.log(text)
+    navigate('/products');
+    await getProductBySearch(text);
+  }
 
   return (
     <Carousel
@@ -46,8 +55,8 @@ export default function Slider({ slides }: SlidesProps) {
 
                     {/* CTA Button */}
                     <button
-                    onClick={() => item.btnClick} 
-                    className="group inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
+                      onClick={() => searchSlide(item.btnClick as string)}
+                      className="group inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
                       {item.buttonText}
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                     </button>

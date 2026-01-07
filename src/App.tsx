@@ -9,6 +9,7 @@ import { Toaster } from './components/ui/sonner'
 import Cart from './components/Cart'
 import Wishlist from './components/Wishlist'
 import Order from './components/Order'
+import Checkout from './components/Checkout'
 
 function App() {
 
@@ -46,6 +47,10 @@ function App() {
           <Route
             element={<Order />}
             path='/orders'
+          />
+          <Route
+            element={<Checkout />}
+            path='/checkout'
           />
         </Route>
       </Routes>

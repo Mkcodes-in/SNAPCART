@@ -67,14 +67,14 @@ export default function ProductToolbar({ categories, selectedCategory, setSelect
                 transform: "translateX(-50%)",
               }}
             >
-              ₹{range}
+              ${range}
             </div>
           </div>
 
           {/* Min / Max */}
           <div className="flex justify-between text-xs text-gray-500 mt-2">
-            <span>₹{minPrice}</span>
-            <span>₹{maxPrice}</span>
+            <span>${minPrice}</span>
+            <span>${maxPrice}</span>
           </div>
         </div>
       </CardContent>
