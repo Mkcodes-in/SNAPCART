@@ -22,7 +22,6 @@ export default function ProductDetails() {
   const dispatch = useDispatch();
   const wishlistState = useSelector((state: RootState) => state.wishlist);
   const isWishlist = wishlistState.wishlist.some(p => p.id === product?.id);
-  console.log(isWishlist)
 
   useEffect(() => {
     (async () => {

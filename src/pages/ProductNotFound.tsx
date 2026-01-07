@@ -8,7 +8,8 @@ type ErrorProps = {
 
 export default function ProductNotFound({ icon , heading, paragraph }: ErrorProps) {
     return (
-        <div className="flex flex-col items-center justify-center py-36 text-center">
+       <div className="h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+
             <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
                 {icon}
             </div>

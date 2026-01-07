@@ -105,7 +105,7 @@ export default function Cart() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Shipping</span>
-                    <span className="font-medium">Free</span>
+                    <span className="font-medium text-green-600">Free</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Tax (18% GST)</span>

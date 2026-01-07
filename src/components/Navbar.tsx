@@ -12,12 +12,12 @@ import { useSearch } from "./hooks/useSearch";
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
   const state = useSelector((state: RootState) => state.cart);
-  const [text, setText] = useState<string>('');
   const navigate = useNavigate();
-  const { setSearchProduct, setError, setLoading, searchProduct } = useSearch();
+  const { text, setText, setSearchProduct, setError, setLoading } = useSearch();
 
-  const handleSearch = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!text.trim()) return;
     try {
       const res = await getProductBySearch(text);
       setSearchProduct(res);
@@ -27,10 +27,13 @@ export default function Header() {
     } finally {
       setLoading(false);
     }
-    setText('');
+    setText('')
   }
 
-  console.log(searchProduct)
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+    setText(e.target.value);
+  }
+
   return (
     <div className="w-full bg-white border-b border-gray-100 shadow-sm">
       <header className="max-w-7xl mx-auto px-4">
@@ -62,12 +65,12 @@ export default function Header() {
             {/* Search */}
             <div className="relative hidden sm:block">
               <form
-                onSubmit={handleSearch}
+                onSubmit={onSubmit}
                 className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   value={text}
-                  onChange={(e) => setText(e.target.value)}
+                  onChange={handleSearch}
                   onClick={() => navigate('/products')}
                   type="text"
                   placeholder="Search for products..."

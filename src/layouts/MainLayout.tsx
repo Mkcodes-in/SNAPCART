@@ -9,7 +9,7 @@ export default function MainLayout() {
       <Header />
 
       {/* Page Content */}
-      <main className="flex-1 py-4 overflow-y-auto">
+      <main className="flex-1 pt-6 overflow-y-auto">
         <Outlet />
         {/* Footer */}
         <Footer />
