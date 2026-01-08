@@ -5,13 +5,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './store/store.ts'
 import { SearchProvider } from './context/SearchContext.tsx'
+import { FormDataProvider } from './context/FormDataContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
-    <SearchProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </SearchProvider>
+    <FormDataProvider>
+      <SearchProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </SearchProvider>
+    </FormDataProvider>
   </BrowserRouter>,
 )

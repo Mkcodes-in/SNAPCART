@@ -2,7 +2,7 @@ import ProductCard from "@/components/ProductCard";
 import ProductLoader from "@/components/ProductLoader";
 import ProductNotFound from "./ProductNotFound";
 import { PackageX } from "lucide-react";
-import { useSearch } from "@/components/hooks/useSearch";
+import { useSearch } from "@/hooks/useSearch";
 
 export default function Products() {
   const { searchProduct, loading } = useSearch();

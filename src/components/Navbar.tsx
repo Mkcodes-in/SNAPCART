@@ -8,7 +8,7 @@ import '../App.css'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { getProductBySearch } from "@/features/fetchProducts";
-import { useSearch } from "./hooks/useSearch";
+import { useSearch } from "../hooks/useSearch";
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
   const state = useSelector((state: RootState) => state.cart);

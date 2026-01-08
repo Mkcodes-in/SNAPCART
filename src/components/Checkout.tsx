@@ -1,35 +1,16 @@
-import React, { useState } from "react"
 import { Input } from "./ui/input";
 import { Select, SelectContent, SelectItem } from "./ui/select";
 import { SelectTrigger, SelectValue } from "@radix-ui/react-select";
 import { Button } from "./ui/button";
 import CheckoutRightSide from "./CheckoutRightSide";
-
-type formProps = {
-    name: string;
-    phone: string;
-    email: string;
-    address: string;
-    city: string;
-    state: string;
-    pincode: string;
-    paymentMethod: string;
-}
+import { useFrom } from "@/hooks/useForm";
 
 export default function Checkout() {
-    const [form, setForm] = useState<formProps>({
-        name: "",
-        phone: "",
-        email: "",
-        address: "",
-        city: "",
-        state: "",
-        pincode: "",
-        paymentMethod: "",
-    });
+    const { form, setForm } = useFrom();
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        console.log(form)
     }
 
     function handleChange(
