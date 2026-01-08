@@ -4,13 +4,23 @@ import { SelectTrigger, SelectValue } from "@radix-ui/react-select";
 import { Button } from "./ui/button";
 import CheckoutRightSide from "./CheckoutRightSide";
 import { useFrom } from "@/hooks/useForm";
+import { useDispatch, useSelector } from "react-redux";
+import { orderPlace } from "@/features/orderSlice";
+import type { RootState } from "@/store/store";
+import type { OrderDetailProps } from "@/types/orderType";
 
 export default function Checkout() {
     const { form, setForm } = useFrom();
+    const state = useSelector((state: RootState) => state);
+    const dispatch = useDispatch();
+    const orderData: OrderDetailProps = {
+        ...form, 
+        product: state.cart.cart
+    }
+    console.log(state.orders.order, state.cart.cart)
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        console.log(form)
     }
 
     function handleChange(
@@ -219,6 +229,7 @@ export default function Checkout() {
                                     type="submit"
                                     className="w-full h-12 text-base font-semibold mt-6"
                                     size="lg"
+                                onClick={() => dispatch(orderPlace(orderData))}
                                 >
                                     Place Order
                                 </Button>
@@ -228,7 +239,9 @@ export default function Checkout() {
 
                     {/* Right side */}
                     <div className="lg:col-span-1">
-                        <CheckoutRightSide />
+                        <CheckoutRightSide
+                            products={state.cart.cart}
+                        />
                     </div>
                 </div>
             </div>

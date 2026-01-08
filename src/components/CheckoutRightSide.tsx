@@ -1,10 +1,12 @@
-import type { RootState } from "@/store/store"
+import type { CartQuantity } from "@/types/cartType";
 import { Lock } from "lucide-react";
-import { useSelector } from "react-redux"
 
-export default function CheckoutRightSide() {
-    const state = useSelector((state: RootState) => state.cart);
-    const price = state.cart.map(product => product.price * product.quantity);
+type Props = {
+    products: CartQuantity[];
+}
+
+export default function CheckoutRightSide({ products }: Props) {
+    const price = products.map(product => product.price * product.quantity);
     const totalPrice = price.reduce((acc, curr) => acc + curr, 0)
 
     return (
@@ -16,7 +18,7 @@ export default function CheckoutRightSide() {
 
             {/* Cart Items */}
             <div className="space-y-4 mb-6">
-                {state.cart.map((product) => (
+                {products.map((product) => (
                     <div key={product.id} className="flex items-start justify-between">
                         <div>
                             <p className="font-medium">{product.title}</p>
