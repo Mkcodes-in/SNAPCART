@@ -11,13 +11,13 @@ import type { OrderDetailProps } from "@/types/orderType";
 
 export default function Checkout() {
     const { form, setForm } = useFrom();
-    const state = useSelector((state: RootState) => state);
+    const cart = useSelector((state: RootState) => state.cart.cart);
     const dispatch = useDispatch();
+    
     const orderData: OrderDetailProps = {
         ...form, 
-        product: state.cart.cart
+        product: cart
     }
-    console.log(state.orders.order, state.cart.cart)
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -240,7 +240,7 @@ export default function Checkout() {
                     {/* Right side */}
                     <div className="lg:col-span-1">
                         <CheckoutRightSide
-                            products={state.cart.cart}
+                            products={cart}
                         />
                     </div>
                 </div>

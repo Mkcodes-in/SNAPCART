@@ -1,4 +1,4 @@
-import type { Product } from "./product";
+import type { CartQuantity } from "./cartType";
 
 export interface FormDataProps{
     name: string;
@@ -13,7 +13,7 @@ export interface FormDataProps{
 }
 
 export interface OrderDetailProps extends FormDataProps{
-    product: Product[];
+    product: CartQuantity[];
 }
 
 // export interface OrderProps {

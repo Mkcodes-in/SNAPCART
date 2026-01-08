@@ -1,89 +1,94 @@
-import { useFrom } from "@/hooks/useForm";
+import ProductNotFound from "@/pages/ProductNotFound";
 import type { RootState } from "@/store/store";
+import { ClipboardX, Package } from "lucide-react";
 import { useSelector } from "react-redux";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
 
 export default function Order() {
-  const state = useSelector((state: RootState) => state.cart);
-  const { form } = useFrom();
+  const orders = useSelector((state: RootState) => state.orders.order);
 
-  const totalAmount = state.cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  if (orders.length === 0 || !orders) {
+    return (
+      <div className="h-screen">
+        <ProductNotFound
+          icon={<ClipboardX />}
+          heading="No order records found"
+          paragraph="Looks like you haven’t placed any orders. Add items to your cart and check out to get started."
+        />
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
+    <div className="min-h-screen bg-gray-50 px-4 py-8">
+      <div className="max-w-5xl mx-auto">
 
-        {/* ✅ Success Header */}
-        <div className="text-center border-b pb-6">
-          <h1 className="text-2xl font-bold text-green-600">
-            🎉 Order Placed Successfully!
+        {/* Page Title */}
+        <div className="flex items-center gap-2 mb-8">
+          <Package className="text-gray-700" />
+          <h1 className="text-2xl font-semibold text-gray-800">
+            My Orders
           </h1>
-          <p className="text-gray-500 mt-2">
-            Thank you {form.name}, your order has been confirmed.
-          </p>
         </div>
 
-        {/* 👤 Customer Details */}
-        <div className="mt-6">
-          <h2 className="text-lg font-semibold mb-2">Delivery Details</h2>
-          <div className="text-sm text-gray-700 space-y-1">
-            <p><b>Name:</b> {form.name}</p>
-            <p><b>Phone:</b> {form.phone}</p>
-            <p><b>Email:</b> {form.email}</p>
-            <p><b>Address:</b> {form.address}, {form.city}, {form.state} - {form.pincode}</p>
-            <p><b>Payment Method:</b> {form.paymentMethod}</p>
-          </div>
-        </div>
-
-        {/* 🛒 Ordered Products */}
-        <div className="mt-8">
-          <h2 className="text-lg font-semibold mb-4">Ordered Products</h2>
-
-          <div className="space-y-4">
-            {state.cart.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center gap-4 border rounded-lg p-3"
-              >
-                <img
-                  src={item.thumbnail}
-                  alt={item.title}
-                  className="w-20 h-20 object-cover rounded"
-                />
-
-                <div className="flex-1">
-                  <h3 className="font-medium">{item.title}</h3>
-                  <p className="text-sm text-gray-500">
-                    Quantity: {item.quantity}
+        {/* Orders */}
+        <div className="space-y-6">
+          {orders.map((order, index) => (
+            <Card
+              key={index}
+              className="rounded-2xl shadow-sm"
+            >
+              {/* Header */}
+              <CardHeader className="flex flex-row items-center justify-between">
+                <div>
+                  <CardTitle className="text-lg">
+                    Order placed
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    {new Date(order.date).toLocaleDateString()}
                   </p>
                 </div>
+                <span className="font-semibold px-4 py-1 rounded bg-green-600/30">{order.paymentMethod}</span>
+              </CardHeader>
 
-                <div className="font-semibold">
-                  ₹{item.price * item.quantity}
+              {/* Products */}
+              <CardContent className="space-y-4">
+                {order.product.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex justify-between items-center"
+                  >
+                    <div>
+                      <p className="font-medium">
+                        {item.title}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Qty: {item.quantity}
+                      </p>
+                    </div>
+
+                    <p className="font-semibold">
+                      ${item.price}
+                    </p>
+                  </div>
+                ))}
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold">Total Amount</span>
+                  <span>34</span>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 💰 Total */}
-        <div className="mt-8 border-t pt-4 flex justify-between items-center">
-          <span className="text-lg font-semibold">Total Amount</span>
-          <span className="text-xl font-bold text-green-600">
-            ₹{totalAmount}
-          </span>
-        </div>
-
-        {/* 🔘 Actions */}
-        <div className="mt-6 flex justify-center gap-4">
-          <button className="px-6 py-2 rounded bg-black text-white hover:bg-gray-800">
-            Continue Shopping
-          </button>
-          <button className="px-6 py-2 rounded border">
-            Download Invoice
-          </button>
+              </CardContent>
+              {/* Footer */}
+              <CardFooter className="flex flex-col items-start gap-1 text-sm text-muted-foreground">
+                <p className="font-medium text-foreground">
+                  Delivery Address
+                </p>
+                <p>
+                  {order.address}, {order.city}, {order.state} -{" "}
+                  {order.pincode}
+                </p>
+              </CardFooter>
+            </Card>
+          ))}
         </div>
 
       </div>
