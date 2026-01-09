@@ -8,14 +8,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { orderPlace } from "@/features/orderSlice";
 import type { RootState } from "@/store/store";
 import type { OrderDetailProps } from "@/types/orderType";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { clearCart } from "@/features/cartSlice";
 
 export default function Checkout() {
     const { form, setForm } = useFrom();
     const cart = useSelector((state: RootState) => state.cart.cart);
     const dispatch = useDispatch();
-    
+    const navigate = useNavigate();
+
     const orderData: OrderDetailProps = {
-        ...form, 
+        ...form,
         product: cart
     }
 
@@ -229,7 +233,12 @@ export default function Checkout() {
                                     type="submit"
                                     className="w-full h-12 text-base font-semibold mt-6"
                                     size="lg"
-                                onClick={() => dispatch(orderPlace(orderData))}
+                                    onClick={() => {
+                                        dispatch(orderPlace(orderData));
+                                        navigate('/orders');
+                                        dispatch(clearCart());
+                                        toast.success('order placed successfully');
+                                    }}
                                 >
                                     Place Order
                                 </Button>

@@ -3,7 +3,7 @@ import type { RootState } from "@/store/store";
 import { Search, ShoppingCart, User } from "lucide-react"
 import React, { useState } from "react"
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import '../App.css'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
@@ -53,7 +53,9 @@ export default function Header() {
             <nav className="flex items-center gap-6">
               {NavLinks.map(itm => (
                 <div key={itm.name}>
-                  <Link to={itm.path} className="text-gray-700 hover:text-blue-600 font-medium transition-colors">{itm.name}</Link>
+                  <NavLink
+                    to={itm.path}
+                    className={({ isActive }) => isActive ? "text-blue-600 font-medium transition-colors" : "text-gray-700 hover:text-blue-600 font-medium transition-colors"}>{itm.name}</NavLink>
                 </div>
               ))}
             </nav>

@@ -3,7 +3,6 @@ import { NavLinks } from "@/data/NavLinks"
 import {
     Facebook,
     Instagram,
-    ShoppingCart,
     Twitter,
     Youtube
 } from "lucide-react"
@@ -17,8 +16,7 @@ export default function Footer() {
                 {/* Brand */}
                 <div className="space-y-4">
                     <h1 className="flex items-center gap-2 text-lg font-bold">
-                        <ShoppingCart className="h-5 w-5" />
-                        SnapCart
+                        SNAPCART
                     </h1>
 
                     <p className="text-sm text-gray-600">
