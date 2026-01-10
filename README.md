@@ -1,73 +1,93 @@
-# React + TypeScript + Vite
+### Intro
+SNAPCART is a real-world E-Commerce Single Page Application (SPA) built using React, TypeScript, and Vite.
+This project simulates a complete shopping experience using a Dummy API with modern frontend tools and scalable state management.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+___
 
-Currently, two official plugins are available:
+### Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Single Page Application (SPA)
 
-## React Compiler
+* Product listing & product details page
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Add to Cart functionality
 
-## Expanding the ESLint configuration
+* Wishlist management
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* Order management
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* Dynamic routing using React Router
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* Advanced & scalable state management using Redux Toolkit (RTK)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* Persistent cart & wishlist using Local Storage
+
+* Responsive UI for all devices
+
+* Clean and modular code structure
+
+---
+
+### State Management
+
+* Redux Toolkit (RTK) used for global state
+
+* Separate slices for:
+
+* Products
+
+* Cart
+
+* Wishlist
+
+* Orders
+
+* Optimized reducers & actions
+
+* Local Storage integration for cart & wishlist persistence
+
+---
+
+Tech Stack
+* Frontend
+
+* React
+
+* TypeScript
+
+* Vite
+
+* State Management
+
+* Redux Toolkit (RTK)
+
+* Routing
+
+* React Router DOM
+
+* UI & Styling
+
+* Tailwind CSS
+
+* shadcn/ui component library
+
+* API
+
+* Dummy REST API (for products)
+
+---
+
+### Installation & Setup
 ```
+# Clone the repository
+git clone https://github.com/Mkcodes-in/SNAPCART.git
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Navigate to project directory
+cd snapcart
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# Install dependencies
+npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Run the development server
+npm run dev
 ```
