@@ -44,19 +44,19 @@ export default function Slider({ slides }: SlidesProps) {
                     </div>
 
                     {/* Title */}
-                    <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+                    <h1 className="mt-2 text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
                       {item.title}
                     </h1>
 
                     {/* Description */}
-                    <p className="text-lg md:text-xl text-white/90 mb-8 max-w-md">
+                    <p className="text-md sm:text-lg md:text-xl text-white/90 mb-8 max-w-md">
                       {item.description}
                     </p>
 
                     {/* CTA Button */}
                     <button
                       onClick={() => searchSlide(item.btnClick as string)}
-                      className="group inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
+                      className="group inline-flex items-center gap-3 bg-white text-gray-900 px-3 py-2 md:px-8 md:py-4 rounded-full font-semibold text-sm md:text-lg hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer">
                       {item.buttonText}
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                     </button>

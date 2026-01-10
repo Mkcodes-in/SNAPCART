@@ -130,15 +130,20 @@ export default function Header() {
         {/* Mobile Search */}
         {activeMenu && (
           <div className="lg:hidden border-t border-gray-100 py-4 animate-slideDown">
-            <div className="mb-6 px-2">
-              <div className="relative">
+            <div className="sm:hidden mb-6 px-2">
+              <form
+                onSubmit={onSubmit}
+                className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
+                  value={text}
+                  onChange={handleSearch}
+                  onClick={() => navigate('/products')}
                   type="text"
-                  placeholder="Search products..."
-                  className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 placeholder:text-gray-400"
+                  placeholder="Search for products..."
+                  className="pl-12 pr-4 py-2.5 w-full bg-gray-50 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 placeholder:text-gray-400"
                 />
-              </div>
+              </form>
             </div>
 
             {/* Mobile Navigation */}
