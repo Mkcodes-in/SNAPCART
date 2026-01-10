@@ -27,6 +27,10 @@ export default function Checkout() {
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        dispatch(orderPlace(orderData));
+        navigate('/orders');
+        dispatch(clearCart());
+        toast.success('order placed successfully');
         setForm({
             id: "",
             name: "",
@@ -247,12 +251,6 @@ export default function Checkout() {
                                     type="submit"
                                     className="w-full h-12 text-base font-semibold mt-6"
                                     size="lg"
-                                    onClick={() => {
-                                        dispatch(orderPlace(orderData));
-                                        navigate('/orders');
-                                        dispatch(clearCart());
-                                        toast.success('order placed successfully');
-                                    }}
                                 >
                                     Place Order
                                 </Button>

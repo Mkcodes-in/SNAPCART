@@ -6,7 +6,6 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 
 export default function Order() {
   const orders = useSelector((state: RootState) => state.orders.order);
-  console.log(orders);
 
   if (orders.length === 0 || !orders) {
     return (
@@ -64,7 +63,7 @@ export default function Order() {
                       <p className="font-medium">{prod.title}</p>
                       <p className="text-sm text-muted-foreground">
                         Qty: {prod.quantity}
-                      </p>
+                      </p>            
                     </div>
                     <p className="font-semibold">
                       ${prod.price * prod.quantity}

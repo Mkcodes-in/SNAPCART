@@ -9,6 +9,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { Button } from "./ui/button";
 import { getProductBySearch } from "@/features/fetchProducts";
 import { useSearch } from "../hooks/useSearch";
+import NavbarLogo from "./NavbarLogo";
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(false);
   const state = useSelector((state: RootState) => state.cart);
@@ -44,7 +45,7 @@ export default function Header() {
             className="flex items-center gap-3"
             to={'/'}>
             <div className="flex flex-col">
-              <span className="navbar font-bold text-2xl text-gray-900">SNAPCART</span>
+              <span className="navbar flex items-center -gap-x-2 font-bold text-lg lg:text-2xl text-gray-900"><NavbarLogo />NAPCART</span>
             </div>
           </Link>
 
