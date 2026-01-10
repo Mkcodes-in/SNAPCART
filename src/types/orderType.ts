@@ -1,6 +1,7 @@
 import type { CartQuantity } from "./cartType";
 
 export interface FormDataProps{
+    id: string;
     name: string;
     phone: string;
     email: string;

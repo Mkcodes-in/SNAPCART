@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 
 export default function Order() {
   const orders = useSelector((state: RootState) => state.orders.order);
+  console.log(orders);
 
   if (orders.length === 0 || !orders) {
     return (
@@ -32,65 +33,64 @@ export default function Order() {
         </div>
 
         {/* Orders */}
-        <div className="space-y-6">
-          {orders.map((order, index) => (
-            <Card
-              key={index}
-              className="rounded-2xl shadow-sm"
-            >
-              {/* Header */}
-              <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                  <CardTitle className="text-lg">
-                    Order placed
-                  </CardTitle>
-                  <p className="text-sm text-muted-foreground">
-                    {new Date(order.date).toLocaleDateString()}
-                  </p>
-                </div>
-                <span className="font-semibold px-4 py-1 rounded bg-green-600/30">{order.paymentMethod}</span>
-              </CardHeader>
+        <Card className="space-y-2 p-2">
+          {orders.map((order) => {
+            const orderTotal = order.product.reduce((total, prod) => {
+              return total + prod.price * prod.quantity;
+            }, 0);
 
-              {/* Products */}
-              <CardContent className="space-y-4">
-                {order.product.map((item) => (
-                  <div
-                    key={item.id}
+            return (
+              <div key={order.id} className="border rounded-lg py-4">
+                {/* Header */}
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <div>
+                    <CardTitle className="text-lg">Order placed</CardTitle>
+                    <p className="text-sm text-muted-foreground">
+                      {new Date(order.date).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <span className="font-semibold px-4 py-1 rounded-md bg-gray-600/20">
+                    {order.paymentMethod}
+                  </span>
+                </CardHeader>
+
+                {/* Products */}
+                {order.product.map((prod) => (
+                  <CardContent
+                    key={prod.id}
                     className="flex justify-between items-center"
                   >
                     <div>
-                      <p className="font-medium">
-                        {item.title}
-                      </p>
+                      <p className="font-medium">{prod.title}</p>
                       <p className="text-sm text-muted-foreground">
-                        Qty: {item.quantity}
+                        Qty: {prod.quantity}
                       </p>
                     </div>
-
                     <p className="font-semibold">
-                      ${item.price}
+                      ${prod.price * prod.quantity}
+                    </p>
+                  </CardContent>
+                ))}
+
+                {/* Footer */}
+                <CardFooter className="flex flex-col items-start gap-2 text-sm">
+                  <div className="font-semibold text-foreground text-lg flex justify-between w-full py-2">
+                    Order Total: <span>${(orderTotal * 0.18 + orderTotal).toFixed(2)}</span>
+                  </div>
+
+                  <div className="text-muted-foreground">
+                    <p className="font-medium text-foreground">
+                      Delivery Address
+                    </p>
+                    <p>
+                      {order.address}, {order.city}, {order.state} - {order.pincode}
                     </p>
                   </div>
-                ))}
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold">Total Amount</span>
-                  <span>34</span>
-                </div>
-              </CardContent>
-              {/* Footer */}
-              <CardFooter className="flex flex-col items-start gap-1 text-sm text-muted-foreground">
-                <p className="font-medium text-foreground">
-                  Delivery Address
-                </p>
-                <p>
-                  {order.address}, {order.city}, {order.state} -{" "}
-                  {order.pincode}
-                </p>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-
+                </CardFooter>
+              </div>
+            );
+          })}
+        </Card>
       </div>
     </div>
   );

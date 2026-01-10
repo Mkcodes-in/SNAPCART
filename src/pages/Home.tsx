@@ -6,6 +6,8 @@ import ProductLoader from "@/components/ProductLoader";
 import ProductCard from "@/components/ProductCard";
 import { slides } from "@/data/Slides";
 import Slider from "@/components/Slider";
+import ProductNotFound from "./ProductNotFound";
+import { PackageX } from "lucide-react";
 
 export default function Home() {
   const { product, loading } = useSelector((state: RootState) => state.products);
@@ -17,7 +19,11 @@ export default function Home() {
 
   if (loading) { return <ProductLoader /> }
   if (!product || product.length === 0) {
-    return <p>No products found</p>
+    return <ProductNotFound
+      icon={<PackageX />}
+      heading="No products found"
+      paragraph="Failed to fetch product from server :("
+    />
   }
 
   return (
@@ -26,7 +32,7 @@ export default function Home() {
       <Slider
         slides={slides}
       />
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-12">
         {product.map((prod) => (
           <ProductCard

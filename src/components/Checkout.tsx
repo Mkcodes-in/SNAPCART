@@ -20,11 +20,25 @@ export default function Checkout() {
 
     const orderData: OrderDetailProps = {
         ...form,
+        id: (crypto.randomUUID()).toString(),
+        date: Date.now(),
         product: cart
     }
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        setForm({
+            id: "",
+            name: "",
+            phone: "",
+            email: "",
+            address: "",
+            city: "",
+            state: "",
+            pincode: "",
+            paymentMethod: "",
+            date: 0
+        })
     }
 
     function handleChange(

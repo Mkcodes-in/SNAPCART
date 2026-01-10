@@ -7,7 +7,7 @@ type Props = {
 
 export default function CheckoutRightSide({ products }: Props) {
     const price = products.map(product => product.price * product.quantity);
-    const totalPrice = price.reduce((acc, curr) => acc + curr, 0)
+    const totalPrice = price.reduce((acc, curr) => acc + curr, 0);
 
     return (
         <div className="bg-white rounded-xl shadow-sm border p-6 sticky top-6">
@@ -33,7 +33,7 @@ export default function CheckoutRightSide({ products }: Props) {
             <div className="border-t border-b py-4 space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Subtotal</span>
-                    <span>${totalPrice}</span>
+                    <span>${(totalPrice).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Shipping</span>

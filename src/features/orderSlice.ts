@@ -1,4 +1,5 @@
 import type { OrderDetailProps } from "@/types/orderType";
+import { useStoredState } from "@/utils/storage";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 type OrdersState = {
@@ -6,7 +7,7 @@ type OrdersState = {
 }
 
 const initialState: OrdersState = {
-    order: []
+    order: useStoredState<OrderDetailProps[]>('orders', []),
 }
 
 export const orderSlice = createSlice({

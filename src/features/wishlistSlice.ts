@@ -1,4 +1,5 @@
 import type { Product } from "@/types/product";
+import { useStoredState } from "@/utils/storage";
 import { createSlice } from "@reduxjs/toolkit";
 
 type wishlistType = {
@@ -6,7 +7,7 @@ type wishlistType = {
 }
 
 const initialState: wishlistType = {
-    wishlist: []
+    wishlist: useStoredState<Product[]>('wishlist', []),
 };
 
 const wishlistSlice = createSlice({

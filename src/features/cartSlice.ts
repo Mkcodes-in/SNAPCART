@@ -1,9 +1,9 @@
 import type { CartQuantity, CartState } from "@/types/cartType";
-import { loadCartState } from "@/utils/storage";
+import { useStoredState } from "@/utils/storage";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: CartState = {
-    cart: loadCartState<CartQuantity[]>('cart', []),
+    cart: useStoredState<CartQuantity[]>('cart', []),
 }
 
 const cartSlice = createSlice({
