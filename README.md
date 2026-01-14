@@ -63,7 +63,7 @@ Tech Stack
 
 * Routing
 
-* React Router DOM
+* React Router DOM (404 Error Page)
 
 * UI & Styling
 
